@@ -8,3 +8,15 @@ before_install:
 
 script:
     - docker run -e CI=true allanshivji/docker-reactrepo npm run test
+
+deploy:
+    provider: elasticbenstalk
+    region: "us-east-2"
+    app: "docker-reactrepo"
+    env: "DockerReactrepo-env"
+    bucket_name: "elasticbeanstalk-us-east-2-287822648138"
+    bucket_path: "docker-reactrepo"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
